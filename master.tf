@@ -5,9 +5,13 @@ resource "google_compute_instance" "mesos-master" {
     zone = "${var.zone}"
     tags = ["mesos-master","http","https","ssh","vpn"]
 
-    disk {
-      image = "${var.image}"
-      type = "pd-ssd"
+    boot_disk {
+      initialize_params {
+        image = "${var.image}"
+      }
+    }
+
+    scratch_disk {
     }
 
     # declare metadata for configuration of the node

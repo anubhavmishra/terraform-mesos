@@ -5,9 +5,13 @@ resource "google_compute_instance" "mesos-slave" {
     zone = "${var.zone}"
     tags = ["mesos-slave","http","https","ssh"]
 
-    disk {
-      image = "${var.image}"
-      type = "pd-ssd"
+    boot_disk {
+      initialize_params {
+        image = "${var.image}"
+      }
+    }
+
+    scratch_disk {
     }
 
     metadata {
